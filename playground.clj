@@ -20,6 +20,16 @@
                (let [x (first xs)]
                  (if (= 0 x)
                    (recur (rest xs) 0 (max acc most))
-                   (recur (rest xs) (+ x acc) most)))))]
-  (trav parsed 0 0))
+                   (recur (rest xs) (+ x acc) most)))))
+      
+      xs [1 2 4 5]
+      n (if (< (first xs) 4)
+          (sort (conj (rest xs) 4))
+          xs)]
+      
+       
+  n) 
+(apply + [1 4 5]) 
+      
+  ;(trav parsed 0 0))
 

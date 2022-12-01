@@ -3,7 +3,7 @@
 
  :aliases
  {
-  :run-m {:main-opts ["-m" "jorgen.aoc22"]}
+  :run-m {:main-opts ["-m" "juggepugge.aoc22"]}
 
   :run-x {:ns-default jorgen.aoc22
           :exec-fn greet
