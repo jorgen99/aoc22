@@ -8,9 +8,9 @@
                  (if (empty? xs)
                    (max-fn acc maxx)
                    (let [x (first xs)]
-                     (if (= 0 x)
+                     (if (= "" x)
                        (recur (rest xs) 0 (max-fn acc maxx))
-                       (recur (rest xs) (+ x acc) maxx)))))]
+                       (recur (rest xs) (+ (Integer/parseInt x) acc) maxx)))))]
     (max-fn xs acc maxx)))
 
 

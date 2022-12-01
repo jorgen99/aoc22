@@ -6,13 +6,7 @@
 
 
 (defn- slurp-test-data [file]
-  (let [f (slurp file)]
-    (as-> f $
-        (str/split $ #"\n")
-        (map #(if (empty? %) 
-               0
-               (Integer/parseInt %))
-             $))))
+  (str/split (slurp file) #"\n"))
 
 
 (deftest a-test
