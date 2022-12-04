@@ -49,16 +49,16 @@
     (is (= 8 (d2/parse-and-score "A Y")))))
 
  
-(deftest apa-bepa
-  (testing "It should..."
+(deftest test-part1-and-two
+  (testing "It should score part1"
     (let [lines (slurp-test-data "resources/02_test.txt")]
       (is (= 15 (d2/part1 lines))))
     (let [lines (slurp-test-data "resources/02_part1.txt")]
       (is (= 11767 (d2/part1 lines)))))
 
-  #_(testing "It should..."
-     (let [lines (slurp-test-lines "resources/01_test.txt")]
-       (is (= 45000 (part2 lines))))
-     (let [lines (slurp-test-lines "resources/01_part1.txt")]
-       (is (= 209603 (part2 lines))))))
+  (testing "It should score part2"
+   (let [lines (slurp-test-data "resources/02_test.txt")]
+     (is (= 12 (d2/part2 lines))))
+   (let [lines (slurp-test-data "resources/02_part1.txt")]
+     (is (= 13886 (d2/part2 lines))))))
 
