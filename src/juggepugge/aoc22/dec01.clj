@@ -1,6 +1,4 @@
-(ns juggepugge.aoc22-dec01
-  (:require
-   [clojure.string :as str]))
+(ns juggepugge.aoc22.dec01)
 
 
 (defn- find-max [xs acc maxx max-fn]

@@ -1,8 +1,8 @@
-(ns juggepugge.aoc22-dec01-test
+(ns juggepugge.aoc22.dec01-test
   (:require
     [clojure.string :as str]
     [clojure.test :refer :all]
-    [juggepugge.aoc22-dec01 :refer :all]))
+    [juggepugge.aoc22.dec01 :refer :all]))
 
 
 (defn- slurp-test-data [file]
