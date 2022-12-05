@@ -1,38 +1,34 @@
 (ns repl
   (:require
-    [clojure.string :as str]))
+    [clojure.string :as str]
+    [clojure.set :as set]))
 
 
-(let [a {:apa 10}]
-  a)
+
+(def shape-idx
+ (set/map-invert
+   (into {} (map-indexed
+              vector
+              [:rock :paper :scissors])))) 
 
 
-(let [f (slurp "resources/01_test.txt")
-      parsed (as-> f $
-                 (str/split $ #"\n")
-                 (map #(if (empty? %)
-                        0
-                        (Integer/parseInt %))
-                      $))
-      trav (fn [xs acc most]
-             (if (empty? xs)
-               (max acc most)
-               (let [x (first xs)]
-                 (if (= 0 x)
-                   (recur (rest xs) 0 (max acc most))
-                   (recur (rest xs) (+ x acc) most)))))
+(let [s {:opponent :rock :shape :scissors}
+      shapes [:rock :paper :scissors]
+      v1 (zipmap shapes (map-indexed (fn [idx _] idx) shapes))
+      v2 (set/map-invert (into {} (map-indexed vector shapes)))
+      v3 (set/map-invert (zipmap (iterate inc 0) shapes))
+      diff (->> ((juxt :opponent :shape) s)
+                (map shape-idx)
+                (reduce -))]     
+ (if (= diff 0)
+   :draw
+   (if (< diff 0)
+     :lost
+     :won)))
+   
 
-      xs [1 2 4 5]
-      n (if (< (first xs) 4)
-          (sort (conj (rest xs) 4))
-          xs)]
-
-
-  n)
-(some [1 3] [1 4])
-
-(let [shapes {:opponent :rock :shape :paper}]
-  (assoc shapes :outcome :won))
-
-  ;(trav parsed 0 0))
-
+; 0 => draw
+; 1 => win
+; -1 => lose
+; 2 => win
+; -2 => lose
