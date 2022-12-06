@@ -1,15 +1,15 @@
 (ns juggepugge.aoc22.dec01)
 
 
-(defn- find-max [xs acc maxx max-fn]
-  (let [max-fn (fn [xs acc maxx]
+(defn- find-max [xs acc current-max max-fn]
+  (let [finder (fn [xs acc current-max]
                  (if (empty? xs)
-                   (max-fn acc maxx)
+                   (max-fn acc current-max)
                    (let [x (first xs)]
                      (if (= "" x)
-                       (recur (rest xs) 0 (max-fn acc maxx))
-                       (recur (rest xs) (+ (Integer/parseInt x) acc) maxx)))))]
-    (max-fn xs acc maxx)))
+                       (recur (rest xs) 0 (max-fn acc current-max))
+                       (recur (rest xs) (+ (Integer/parseInt x) acc) current-max)))))]
+    (finder xs acc current-max)))
 
 
 (defn part1 [data]
