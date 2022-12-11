@@ -7,15 +7,8 @@
   (take-while #(not (empty? %)) lines))
   
 
-(defn no-of-stacks [lines]
-  (let [number-line (last (->stack-lines lines))]
-    (count
-      (remove empty?
-        (str/split number-line #" ")))))
-
-
 (defn- add-letter-to-column [acc idx letter]
-  (let [stack-no (keyword (str (inc idx)))]
+  (let [stack-no (inc idx)]
     (update-in acc [stack-no]
       (fn [v]
         (vec (cons letter (vec v)))))))
@@ -39,6 +32,10 @@
 
 
 (defn ->stacks [lines]
+  ;; butlast -> remove stack no line
+  ;; map rest -> remove first char in each line
+  ;; map butlast -> remove last char in each line
+  ;; then take every 4th char to get the container letters (or \space)
   (let [stacks (map butlast (map rest (butlast (->stack-lines lines))))
         stack-letters (mapv #(take-nth 4 %) stacks)]
     (reduce (fn [acc row]
@@ -51,16 +48,15 @@
 
 (defn move-one [stacks instruction]
   (let [[no from to] instruction
-        from-key (keyword (str from))
-        to-key (keyword (str to))
-        fromv (get stacks from-key)
-        being-moved (reverse (subvec fromv (- (count fromv) no)))
-        fromv-after (subvec fromv 0 (- (count fromv) no))
-        tov (get stacks to-key)
+        fromv (get stacks from)
+        from-idx (- (count fromv) no)
+        being-moved (subvec fromv from-idx)
+        fromv-after (subvec fromv 0 from-idx)
+        tov (get stacks to)
         tov-after (apply conj tov being-moved)]
     (-> stacks
-        (assoc from-key fromv-after)
-        (assoc to-key tov-after))))
+        (assoc from fromv-after)
+        (assoc to tov-after))))
 
 
 (defn move-all [lines]
@@ -80,6 +76,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-#_(defn part2 [lines]
-   ( (preduce + (map parse-and-score2 lines))))
+(defn part2 [lines]
+ (part1 lines))
 
