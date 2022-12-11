@@ -13,16 +13,16 @@
 
 
 (defn part1 [data]
-  (find-max data 0 0 max)) 
+  (find-max data 0 0 max))
 
 
 (defn max3 [m xs]
-  (sort 
+  (sort
     (if (> 3 (count xs))
-     (conj xs m)
-     (if (< (first xs) m)
-       (conj (rest xs) m)
-       xs))))
+      (conj xs m)
+      (if (< (first xs) m)
+        (conj (rest xs) m)
+        xs))))
 
 
 (defn part2 [data]

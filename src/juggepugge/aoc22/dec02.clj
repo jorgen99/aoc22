@@ -8,6 +8,7 @@
    :paper 2
    :scissors 3})
 
+
 (def outcome-scores
   {:won 6
    :draw 3
@@ -23,7 +24,7 @@
 (defn score-outcome [round]
   (->> round
        :outcome
-       (get outcome-scores))) 
+       (get outcome-scores)))
 
 
 (defn score-round [round]
@@ -39,14 +40,14 @@
 
 
 (defn line->shapes [[opponent my-shape]]
-  {:opponent (letter->shape opponent) 
-   :shape (letter->shape my-shape)}) 
+  {:opponent (letter->shape opponent)
+   :shape (letter->shape my-shape)})
 
 
 (defn win-lose? [{:keys [opponent shape]}]
   (if (= opponent shape)
     :draw
-    (case [opponent shape] 
+    (case [opponent shape]
       ([:rock :paper]
        [:paper :scissors]
        [:scissors :rock]) :won
@@ -72,7 +73,8 @@
 (defn part1 [lines]
   (reduce + (map parse-and-score lines)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;
 
 (defn letter->outcome [letter]
   (case letter
@@ -82,14 +84,14 @@
 
 
 (defn line->shape-and-outcome [[opponent strategy]]
-  {:opponent (letter->shape opponent) 
-   :outcome (letter->outcome strategy)}) 
+  {:opponent (letter->shape opponent)
+   :outcome (letter->outcome strategy)})
 
 
 (defn outcome->shape [{:keys [opponent outcome]}]
   (if (= :draw outcome)
     opponent
-    (case [opponent outcome] 
+    (case [opponent outcome]
       ([:scissors :won]
        [:paper :lost]) :rock
       ([:rock :won]

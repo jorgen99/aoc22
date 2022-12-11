@@ -1,0 +1,3 @@
+{:files
+ {:ignore #{".cljs_node_repl" "target" ".git" "personal_playgrounds"}},
+ :rules {:functions {:enabled? false}}}
