@@ -6,7 +6,8 @@
 
 
 (let [lines (slurp-test-data "resources/05_test.txt")
-      instructions (filter #(str/starts-with? % "move") lines)
-      stacks {1 [\Z \N] 2 [\M \C \D] 3 [\P]}
-      stack-no 2]
-  (stack-no stacks))
+      prio (fn [ch]
+             (if (< (int ch) (int \a))
+               (+ 26 (- (int ch) 64))
+               (- (int ch) 96)))])
+(empty? (rest '(\a \b)))

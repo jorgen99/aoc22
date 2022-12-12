@@ -1,7 +1,7 @@
 (ns juggepugge.aoc22.dec03
   (:require
-    [clojure.string :as str]
-    [clojure.set :as clojure-set]))
+    [clojure.set :as clojure-set]
+    [clojure.string :as str]))
 
 
 (defn line-in-half [line]
@@ -9,16 +9,19 @@
         char-seq-map (partition middle-idx line)]
     (map #(apply str %)  char-seq-map)))
 
+
 (defn common-letter [[left right]]
-   (first
-     (clojure-set/intersection
+  (first
+    (clojure-set/intersection
       (set (seq left))
-      (set (seq right))))) 
+      (set (seq right)))))
+
 
 (defn prio [ch]
   (if (< (int ch) (int \a))
     (+ 27 (- (int ch) (int \A)))
     (- (int ch) 96)))
+
 
 (defn prio-for-line [line]
   (-> line
@@ -28,15 +31,32 @@
       prio))
 
 
+(defn prio-for-lines [lines]
+  (prio
+    (first
+      (reduce (fn [acc line]
+                (clojure-set/intersection
+                  (set (seq line))
+                  acc))
+              (set (seq (first lines)))
+              lines))))
+
+
 (defn part1 [lines]
   (reduce
     (fn [acc line]
       (+ acc (prio-for-line line)))
     0
     lines))
+
+
 ;;
 
 
-#_(defn part2 [lines]
-   ( (preduce + (map parse-and-score2 lines))))
+(defn part2 [lines]
+  (reduce
+    (fn [acc three-lines]
+      (+ acc (prio-for-lines three-lines)))
+    0
+    (partition 3 lines)))
 
