@@ -31,15 +31,21 @@
       prio))
 
 
+(defn line-intersections [lines]
+  (reduce (fn [acc line]
+            (clojure-set/intersection
+              (set (seq line))
+              acc))
+          (set (seq (first lines)))
+          lines))
+
+
 (defn prio-for-lines [lines]
-  (prio
-    (first
-      (reduce (fn [acc line]
-                (clojure-set/intersection
-                  (set (seq line))
-                  acc))
-              (set (seq (first lines)))
-              lines))))
+  (->
+    lines
+    line-intersections
+    first
+    prio))
 
 
 (defn part1 [lines]
@@ -48,9 +54,6 @@
       (+ acc (prio-for-line line)))
     0
     lines))
-
-
-;;
 
 
 (defn part2 [lines]
