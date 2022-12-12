@@ -44,11 +44,11 @@
           outcome (d2/shapes->outcome shape)]
       (is (= {:opponent :rock :shape :paper :outcome :won} outcome))))
 
-  
+
   (testing "It should calculate the score for one line"
     (is (= 8 (d2/parse-and-score "A Y")))))
 
- 
+
 (deftest test-part1-and-two
   (testing "It should score part1"
     (let [lines (slurp-test-data "resources/02_test.txt")]
@@ -57,8 +57,8 @@
       (is (= 11767 (d2/part1 lines)))))
 
   (testing "It should score part2"
-   (let [lines (slurp-test-data "resources/02_test.txt")]
-     (is (= 12 (d2/part2 lines))))
-   (let [lines (slurp-test-data "resources/02_part1.txt")]
-     (is (= 13886 (d2/part2 lines))))))
+    (let [lines (slurp-test-data "resources/02_test.txt")]
+      (is (= 12 (d2/part2 lines))))
+    (let [lines (slurp-test-data "resources/02_part1.txt")]
+      (is (= 13886 (d2/part2 lines))))))
 

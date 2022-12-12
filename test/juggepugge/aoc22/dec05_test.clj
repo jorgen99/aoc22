@@ -14,11 +14,10 @@
       (let [lines (slurp-test-data "resources/05_test.txt")
             s (d5/->stacks lines)]
         (is (= true false))))
-   
+
   (testing "slurping file"
     (let [lines (slurp-test-data "resources/05_test.txt")]
       (is (= 9 (count lines))))))
-
 
 
 (deftest dec-05-tests
@@ -36,13 +35,13 @@
       (is (= '(1 1 2) (last parsed)))))
 
   (testing "It should execute one row of instructions"
-    (let [ stacks {1 [\Z \N] 2 [\M \C \D] 3 [\P]}
+    (let [stacks {1 [\Z \N] 2 [\M \C \D] 3 [\P]}
           expected {1 [\Z \N \D] 2 [\M \C] 3 [\P]}
           instructions (first (d5/parse  '("move 1 from 2 to 1")))]
       (is (= expected (d5/move-one stacks instructions)))))
 
   (testing "It should execute one more row of instructions"
-    (let [ stacks {1 [\M \C], 2 [], 3 [\P \Z \N \D]}
+    (let [stacks {1 [\M \C], 2 [], 3 [\P \Z \N \D]}
           expected {1 [], 2 [\M \C], 3 [\P \Z \N \D]}
           one-instruction (first (d5/parse '("move 2 from 1 to 2")))]
       (is (= expected (d5/move-one stacks one-instruction)))))
