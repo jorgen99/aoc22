@@ -25,10 +25,21 @@
   (map sub-or-super? lines))
 
 
+(defn overlap? [line]
+  (let [range-sets (line->range-sets line)]
+    (not (empty? (apply set/intersection range-sets)))))
+
+
+(defn overlaps [lines]
+  (map overlap? lines))
+
+
 (defn part1 [lines]
   (count
     (filter true? (fully-contained lines))))
 
 
-(defn part2 [lines])
+(defn part2 [lines]
+  (count
+    (filter true? (overlaps lines))))
 
