@@ -7,21 +7,20 @@
 
 (defn find-idx-of-unique [line min-unique]
   (let [idx (inc
-              (first 
+              (first
                 (last
                   (take-while #(not (all-unique % min-unique))
                               (map-indexed vector (partition min-unique 1 line))))))]
-    (+ idx min-unique))) 
-    
+    (+ idx min-unique)))
+
 
 (defn find-marker [line]
-  (find-idx-of-unique line 4)) 
-
+  (find-idx-of-unique line 4))
 
 
 (defn find-message [line]
-  (find-idx-of-unique line 14)) 
-    
+  (find-idx-of-unique line 14))
+
 
 (defn part1 [lines]
   (find-marker (first lines)))

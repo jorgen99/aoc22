@@ -29,6 +29,7 @@
       (is (= [false false true true true true]
              (d4/overlaps f))))))
 
+
 (deftest test-part1-and-two
   (testing "It should score part1"
     (let [lines (slurp-test-data "resources/04_test.txt")]

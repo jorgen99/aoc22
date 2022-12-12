@@ -24,7 +24,8 @@
       (is (= [5 6 10 11] (map d6/find-marker (take 4 lines)))))
 
     (testing "It should find the first message"
-      (is (= [19 23 23 29 26 ] (map d6/find-message (take-last 5 lines)))))))
+      (is (= [19 23 23 29 26] (map d6/find-message (take-last 5 lines)))))))
+
 
 (deftest test-part1-and-two
   (testing "It should score part1"

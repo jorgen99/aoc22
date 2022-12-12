@@ -3,9 +3,10 @@
     [clojure.set :as set]
     [clojure.string :as str]))
 
+
 (defn line->range-sets [line]
   (->> (str/split line #",")
-       (map #(str/split % #"-")) 
+       (map #(str/split % #"-"))
        flatten
        (map read-string)
        (partition 2)
@@ -16,7 +17,7 @@
 
 (defn sub-or-super? [line]
   (let [range-sets (line->range-sets line)]
-    (or 
+    (or
       (apply set/subset? range-sets)
       (apply set/superset? range-sets))))
 
